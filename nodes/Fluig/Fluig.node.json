@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-fluig",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Fluig"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://tdn.totvs.com/display/public/fluig/Fluig+API"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://tdn.totvs.com/display/public/fluig/Central+de+ajuda"
+			}
+		]
+	}
+}
