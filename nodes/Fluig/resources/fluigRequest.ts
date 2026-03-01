@@ -8,7 +8,7 @@ import type {
 	IDataObject,
 	IHttpRequestOptions,
 } from 'n8n-workflow';
-import OAuth from 'oauth-1.0a';
+import OAuth from './vendor/oauth-1.0a';
 import crypto from 'crypto';
 
 export async function fluigApiRequest(

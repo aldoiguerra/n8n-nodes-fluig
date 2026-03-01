@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-fluig",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Packet of n8n nodes to integrate with Fluig API",
 	"license": "MIT",
 	"homepage": "",
@@ -16,9 +16,9 @@
 		"url": "https://github.com/aldoiguerra/n8n-nodes-fluig.git"
 	},
 	"scripts": {
-		"build": "n8n-node build",
+		"build": "n8n-node build && cp -r nodes/Fluig/resources/vendor dist/nodes/Fluig/resources/vendor",
 		"build:watch": "tsc --watch",
-		"dev": "n8n-node dev",
+		"dev": "cp -r nodes/Fluig/resources/vendor dist/nodes/Fluig/resources/vendor && n8n-node dev",
 		"lint": "n8n-node lint",
 		"lint:fix": "n8n-node lint --fix",
 		"release": "n8n-node release",
@@ -47,8 +47,5 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
-	},
-	"dependencies": {
-		"oauth-1.0a": "^2.2.6"
 	}
 }

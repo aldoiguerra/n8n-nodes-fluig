@@ -30,7 +30,7 @@ export const requestProperties: INodeProperties[] = [
 		name: 'endpoint',
 		type: 'string',
 		default: '',
-		description: 'url do fluig. Ex: /api/public/2.0/users/getCurrent',
+		description: 'URL do fluig. Ex: /api/public/2.0/users/getCurrent.',
 	},
 	{
 		displayName: 'Body',
@@ -40,7 +40,7 @@ export const requestProperties: INodeProperties[] = [
 			rows: 20,
 		},
 		default: '{}',
-		description: 'Body da requisição. Ex: {"name": "John", "age": 30}',
+		description: 'Body da requisição. Ex: {"name": "John", "age": 30}.',
 		displayOptions: {
 			hide: {
 				endpoint: ['GET']

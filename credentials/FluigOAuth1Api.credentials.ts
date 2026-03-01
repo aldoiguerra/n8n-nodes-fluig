@@ -40,6 +40,7 @@ export class FluigOAuth1Api implements ICredentialType {
 			type: 'string',
 			default: '',
 			description: 'Chave consumidora para acesso ao serviço. Ex: 7b1fe918-6ea2',
+			typeOptions: { password: true },
 		},
 		{
 			displayName: 'Token Secret',
