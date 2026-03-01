@@ -29,7 +29,7 @@ export async function fluigApiRequest(
 			secret: credentials['consumer_secret'] as string,
 		},
 		signature_method: 'HMAC-SHA1',
-		hash_function(base_string: any, key: string) {
+		hash_function(base_string: string, key: string) {
 			return crypto
 				.createHmac('sha1', key)
 				.update(base_string)

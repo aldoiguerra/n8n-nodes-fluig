@@ -1,4 +1,4 @@
-import type { Icon, ICredentialType, INodeProperties } from 'n8n-workflow';
+import type { Icon, ICredentialType, INodeProperties, ICredentialTestRequest } from 'n8n-workflow';
 
 export class FluigOAuth1Api implements ICredentialType {
 	name = 'fluigOAuth1Api';
@@ -53,4 +53,14 @@ export class FluigOAuth1Api implements ICredentialType {
 			description: 'Chave secreta para acesso ao serviço. Ex: 7b1fe918-6ea2',
 		},
 	];
+
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: '={{$credentials["server_url"]}}',
+			url: '={{$credentials["server_url"].endsWith("/") ? "/erro" : "/api/public/2.0/users/getCurrent"}}',
+			method: 'GET',
+			headers: {
+			},
+		},
+	};
 }

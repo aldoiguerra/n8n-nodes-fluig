@@ -5,7 +5,7 @@
 export as namespace OAuth;
 export = OAuth;
 
-import OAuth = require('./oauth-1.0a.js');
+import * as OAuth from './oauth-1.0a.js';
 export default OAuth;
 
 declare class OAuth {
@@ -99,7 +99,7 @@ declare class OAuth {
   /**
    * Sort an object properties by keys.
    */
-  sortObject<O extends {[k: string]: any}, K extends string>(obj: O): Array<{key: keyof O, value: O[K]}>;
+  sortObject<O extends {[k: string]: unknown}, K extends string>(obj: O): Array<{key: keyof O, value: O[K]}>;
 }
 
 declare namespace OAuth {
@@ -180,7 +180,7 @@ declare namespace OAuth {
   export interface RequestOptions {
     url: string;
     method: string;
-    data?: any;
+    data?: unknown;
     includeBodyHash?: boolean;
   }
 
