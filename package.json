@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-fluig",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Packet of n8n nodes to integrate with Fluig API",
 	"license": "MIT",
 	"homepage": "",
