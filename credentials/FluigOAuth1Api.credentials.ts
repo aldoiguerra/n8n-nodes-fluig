@@ -1,4 +1,4 @@
-import type { Icon, ICredentialType, INodeProperties, ICredentialTestRequest } from 'n8n-workflow';
+import type { Icon, ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class FluigOAuth1Api implements ICredentialType {
 	name = 'fluigOAuth1Api';
@@ -16,6 +16,7 @@ export class FluigOAuth1Api implements ICredentialType {
 			type: 'string',
 			default: '',
 			description: 'url do fluig. Ex: https://fluig.minhaempresa.com',
+			required: true,
 		},
 		{
 			displayName: 'Consumer Key',
@@ -23,16 +24,16 @@ export class FluigOAuth1Api implements ICredentialType {
 			type: 'string',
 			default: '',
 			description: 'Chave consumidora para acesso ao serviço. Ex: 7b1fe918-6ea2',
+			required: true,
 		},
 		{
 			displayName: 'Consumer Secret',
 			name: 'consumer_secret',
 			type: 'string',
 			default: '',
-			typeOptions: {
-				password: true,
-			},
 			description: 'Chave secreta para acesso ao serviço. Ex: 7b1fe918-6ea2',
+			required: true,
+			typeOptions: { password: true },
 		},
 		{
 			displayName: 'Token access',
@@ -40,6 +41,7 @@ export class FluigOAuth1Api implements ICredentialType {
 			type: 'string',
 			default: '',
 			description: 'Chave consumidora para acesso ao serviço. Ex: 7b1fe918-6ea2',
+			required: true,
 			typeOptions: { password: true },
 		},
 		{
@@ -47,20 +49,16 @@ export class FluigOAuth1Api implements ICredentialType {
 			name: 'token_secret',
 			type: 'string',
 			default: '',
-			typeOptions: {
-				password: true,
-			},
 			description: 'Chave secreta para acesso ao serviço. Ex: 7b1fe918-6ea2',
+			required: true,
+			typeOptions: { password: true },
+		},
+		{
+			displayName: 'Skip SSL Certificate Validation',
+			name: 'skipSslCertificateValidation',
+			type: 'boolean',
+			default: false,
+			description: 'Desabilita a verificação de certificado SSL. Use com cautela, pois isso pode expor a conexões inseguras.',
 		},
 	];
-
-	test: ICredentialTestRequest = {
-		request: {
-			baseURL: '={{$credentials["server_url"]}}',
-			url: '={{$credentials["server_url"].endsWith("/") ? "/erro" : "/api/public/2.0/users/getCurrent"}}',
-			method: 'GET',
-			headers: {
-			},
-		},
-	};
 }

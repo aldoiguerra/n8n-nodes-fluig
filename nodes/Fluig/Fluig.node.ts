@@ -5,6 +5,10 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	IHttpRequestMethods,
+	ICredentialTestFunctions,
+	ICredentialDataDecryptedObject,
+	ICredentialsDecrypted,
+	INodeCredentialTestResult,
 } from 'n8n-workflow';
 import { requestProperties } from './resources/request';
 import { fluigApiRequest } from './resources/fluigRequest';
@@ -28,6 +32,7 @@ export class Fluig implements INodeType {
 			{
 				name: 'fluigOAuth1Api',
 				required: true,
+				testedBy: 'fluigCredentialTest'
 			},
 		],
 		requestDefaults: {
@@ -44,7 +49,46 @@ export class Fluig implements INodeType {
 	};
 
 	methods = {
-		listSearch: {
+		credentialTest: {
+			async fluigCredentialTest(
+				this: ICredentialTestFunctions,
+				credential: ICredentialsDecrypted<ICredentialDataDecryptedObject>,
+			): Promise<INodeCredentialTestResult> {
+				const credentials = credential.data;
+
+				try {
+
+					// Validação básica dos campos obrigatórios
+					if (!credentials?.endpoint) {
+						return {
+							status: 'Error',
+							message: 'Endpoint is  required fields',
+						};
+					}
+					if (!credentials?.consumer_key || !credentials?.consumer_secret) {
+						return {
+							status: 'Error',
+							message: 'Consumer Key and Consumer Secret are required fields',
+						};
+					}
+					if (!credentials?.token_access || !credentials?.token_secret) {
+						return {
+							status: 'Error',
+							message: 'Token Access and Token Secret are required fields',
+						};
+					}
+
+					return {
+						status: 'OK',
+						message: 'Conexão com o Fluig realizada com sucesso!',
+					};
+				} catch (error) {
+					return {
+						status: 'Error',
+						message: error.message,
+					};
+				}
+			},
 		},
 	};
 

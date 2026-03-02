@@ -66,11 +66,50 @@ export async function fluigApiRequest(
 			// 'Content-Type': 'application/json',
 			...oauth.toHeader(oauth.authorize(request_data, token))
 		} as IDataObject,
-		skipSslCertificateValidation: true, // Esta linha desabilita a verificação SSL
 	};
-
+	if (credentials['skipSslCertificateValidation']) {
+		options['skipSslCertificateValidation'] = true; // Esta linha desabilita a verificação SSL
+	}
 
 	const response = await this.helpers.httpRequest(options);
 
 	return response;
+}
+
+export function fluigAuth(
+	method: IHttpRequestMethods,
+	endpoint: string,
+	credentials: IDataObject = {},
+) {
+
+	const serverUrl = credentials['server_url'];
+
+	// Initialize
+	const oauth = new OAuth({
+		consumer: {
+			key: credentials['consumer_key'] as string,
+			secret: credentials['consumer_secret'] as string,
+		},
+		signature_method: 'HMAC-SHA1',
+		hash_function(base_string: string, key: string) {
+			return crypto
+				.createHmac('sha1', key)
+				.update(base_string)
+				.digest('base64')
+		},
+	})
+
+	// Note: The token is optional for some requests
+	const token = {
+		key: credentials['token_access'] as string,
+		secret: credentials['token_secret'] as string,
+	}
+
+	const request_data = {
+		url: `${serverUrl}${endpoint}`,
+		method: method,
+		data: {},
+	}
+
+	return oauth.toHeader(oauth.authorize(request_data, token)).Authorization;
 }
